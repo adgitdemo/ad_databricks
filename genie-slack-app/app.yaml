@@ -1,0 +1,15 @@
+command: ["python", "app.py"]
+
+env:
+  - name: SLACK_BOT_TOKEN
+    value: "xoxb-8811894310612-9762979916065-CJimkyI5YSwry4Yn2chzZvuF"
+  - name: SLACK_SIGNING_SECRET
+    value: "4a2c72b74dd120961887410173b2c584"
+  - name: SLACK_APP_TOKEN
+    value: "xapp-1-A09MYG4QNDB-9743630288515-32da7348cdc5c9084b125b245cbd435795e19e56c5b84d8dd93e2c0e67fe3c1d"
+  - name: DATABRICKS_GENIE_SPACE_ID
+    value: "01f0271205df1dfc9ea0fb4ac433a089"
+  - name: PORT
+    value: "3000"
+  - name: LOG_LEVEL
+    value: "INFO"
