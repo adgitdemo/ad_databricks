@@ -1,0 +1,69 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.1",
+  "id": "74cf5c8b-6df2-42fb-97b0-61ac5c84ceb6",
+  "packageName": "com.databricks.geniebot",
+  "developer": {
+    "name": "Databricks Genie Bot",
+    "websiteUrl": "https://databricks.com",
+    "privacyUrl": "https://databricks.com/privacy",
+    "termsOfUseUrl": "https://databricks.com/terms"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "DB Genie 08",
+    "full": "Databricks Genie DB Genie 08"
+  },
+  "description": {
+    "short": "Custom bot instance: DB Genie 08",
+    "full": "Databricks Genie Bot - Custom instance: DB Genie 08. Connect to your Databricks workspace and get instant answers powered by AI."
+  },
+  "accentColor": "#FF3621",
+  "bots": [
+    {
+      "botId": "74cf5c8b-6df2-42fb-97b0-61ac5c84ceb6",
+      "scopes": [
+        "personal",
+        "team",
+        "groupchat"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false,
+      "commandLists": [
+        {
+          "scopes": [
+            "personal",
+            "team",
+            "groupchat"
+          ],
+          "commands": [
+            {
+              "title": "hello",
+              "description": "Greet the bot"
+            },
+            {
+              "title": "explain data",
+              "description": "Ask Genie to explain your dataset"
+            },
+            {
+              "title": "help",
+              "description": "Get help using the bot"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.azurewebsites.net",
+    "*.databricks.com"
+  ]
+}
