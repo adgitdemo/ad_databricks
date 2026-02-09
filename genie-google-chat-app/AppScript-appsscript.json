@@ -1,0 +1,12 @@
+{
+  "timeZone": "America/New_York",
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "addOns": {
+    "common": {
+      "name": "Genie Chat App",
+      "logoUrl": "https://xxxxxxxxxx"
+    },
+    "chat": {}
+  }
+}
