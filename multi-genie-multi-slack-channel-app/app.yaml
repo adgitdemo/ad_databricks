@@ -1,0 +1,94 @@
+command: ["python", "app.py"]
+
+resources:
+  - name: genie-space-1
+    genie_space:
+      space_id: "YOUR_GENIE_SPACE_ID_1"
+      permission: "CAN_RUN"
+  - name: genie-space-2
+    genie_space:
+      space_id: "YOUR_GENIE_SPACE_ID_2"
+      permission: "CAN_RUN"
+  - name: sql-warehouse
+    sql_warehouse:
+      id: "YOUR_WAREHOUSE_ID"
+      permission: "CAN_USE"
+
+env:
+  # --- Slack ---
+  - name: SLACK_BOT_TOKEN
+    value: "xoxb-YOUR-SLACK-BOT-TOKEN"
+  - name: SLACK_SIGNING_SECRET
+    value: "YOUR_SLACK_SIGNING_SECRET"
+  - name: SLACK_APP_TOKEN
+    value: "xapp-1-YOUR-SLACK-APP-TOKEN"
+
+  # --- OAuth (OBO) ---
+  - name: OAUTH_CLIENT_ID
+    value: "YOUR_OAUTH_CLIENT_ID"
+  - name: OAUTH_CLIENT_SECRET
+    value: "YOUR_OAUTH_CLIENT_SECRET"
+  - name: OAUTH_REDIRECT_URI
+    value: "https://YOUR_APP_NAME-YOUR_WORKSPACE_ID.databricksapps.com/callback"
+  - name: OAUTH_SCOPES
+    value: "dashboards.genie sql offline_access"
+  - name: AUTH_MODE
+    value: "obo"
+  - name: SP_FALLBACK_ENABLED
+    value: "true"
+
+  # --- Genie spaces ---
+  - name: GENIE_SPACES
+    value: '{"domain1": {"space_id": "YOUR_GENIE_SPACE_ID_1", "description": "Description of domain 1 data"}, "domain2": {"space_id": "YOUR_GENIE_SPACE_ID_2", "description": "Description of domain 2 data"}}'
+  - name: CHANNEL_GENIE_MAP
+    value: '{"YOUR_SLACK_CHANNEL_ID_1": "domain2", "YOUR_SLACK_CHANNEL_ID_2": "domain1"}'
+  - name: DEFAULT_GENIE_ALIAS
+    value: "domain1"
+
+  # --- AI router ---
+  - name: AI_ROUTER_ENABLED
+    value: "false"
+  - name: AI_ROUTER_MODEL
+    value: "databricks-meta-llama-3-1-8b-instruct"
+
+  # --- Token storage ---
+  - name: TOKEN_ENCRYPTION_KEY
+    value: ""
+  - name: TOKEN_STORE_PATH
+    value: ".tokens.enc"
+
+  # --- Retry ---
+  - name: MAX_RETRIES
+    value: "5"
+  - name: BASE_DELAY
+    value: "2.0"
+  - name: MAX_DELAY
+    value: "60.0"
+
+  # --- Polling ---
+  - name: POLL_INTERVAL
+    value: "2.0"
+  - name: POLL_TIMEOUT
+    value: "120.0"
+
+  # --- Semantic cache (set CACHE_ENABLED=true after creating cache infra) ---
+  - name: CACHE_ENABLED
+    value: "true"
+  - name: VS_INDEX_NAME
+    value: "your_catalog.your_schema.genie_cache_vs_index"
+  - name: CACHE_TABLE
+    value: "your_catalog.your_schema.genie_cache"
+  - name: CACHE_SIMILARITY_THRESHOLD
+    value: "0.85"
+  - name: CACHE_WAREHOUSE_ID
+    value: "YOUR_WAREHOUSE_ID"
+
+  # --- Audit ---
+  - name: AUDIT_TABLE
+    value: "your_catalog.your_schema.genie_slack_audit"
+
+  # --- App ---
+  - name: PORT
+    value: "8000"
+  - name: LOG_LEVEL
+    value: "INFO"
