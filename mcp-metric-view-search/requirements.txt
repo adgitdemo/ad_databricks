@@ -1,0 +1,10 @@
+fastmcp>=3.0.0
+databricks-sdk
+scikit-learn
+numpy
+pyyaml
+typing_extensions>=4.13.0
+pydantic>=2.0
+uvicorn
+starlette
+httpx

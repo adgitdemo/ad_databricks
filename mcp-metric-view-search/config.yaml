@@ -1,0 +1,14 @@
+# Metric View Search - Configuration
+# ====================================
+# Scope: Only catalogs/schemas listed below will be scanned for metric views.
+# If empty or omitted, ALL accessible catalogs are scanned (original behavior).
+
+scope:
+  - catalog: your_catalog_name
+    schemas:
+      - your_schema_name
+
+# Auto-refresh settings
+auto_refresh:
+  enabled: true
+  interval_minutes: 60  # How often to check for new metric views

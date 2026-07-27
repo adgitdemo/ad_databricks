@@ -1,0 +1,5 @@
+command: ['python', 'app.py']
+env:
+  - name: DATABRICKS_WAREHOUSE_ID
+    description: "SQL Warehouse ID for executing metric view queries"
+    value: "<YOUR_DATABRICKS_WAREHOUSE_ID>"
