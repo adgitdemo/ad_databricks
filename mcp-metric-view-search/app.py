@@ -259,6 +259,56 @@ def discover_metric_views() -> int:
     return len(views)
 
 
+# ── HTTP routes (browser-friendly landing + health check) ─────────
+
+@mcp.custom_route("/", methods=["GET"])
+async def root(request):
+    """Human-friendly landing page so clicking the app link isn't a 404.
+
+    This app is an MCP server — it has no interactive UI. MCP clients
+    connect to the /mcp endpoint with a Bearer token.
+    """
+    from starlette.responses import HTMLResponse
+    mcp_url = f"{_sp_cfg.host.rstrip('/')}/mcp" if _sp_cfg.host else "/mcp"
+    html = f"""<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Metric View Search — MCP Server</title>
+<style>
+  body {{ font-family: -apple-system, Segoe UI, Roboto, sans-serif; max-width: 720px;
+         margin: 60px auto; padding: 0 24px; color: #1b1b1f; line-height: 1.5; }}
+  code {{ background: #f2f2f5; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }}
+  .box {{ background: #f7f7fa; border: 1px solid #e2e2e8; border-radius: 8px; padding: 16px 20px; }}
+  h1 {{ font-size: 1.5rem; }} li {{ margin: 4px 0; }}
+</style></head>
+<body>
+  <h1>Metric View Search — MCP Server</h1>
+  <p>This is a <strong>Model Context Protocol (MCP)</strong> server. It has no
+     interactive web UI — connect an MCP client (Claude Code, Genie Code, ChatGPT)
+     to the endpoint below using a Databricks Bearer token.</p>
+  <div class="box"><strong>MCP endpoint:</strong><br><code>{mcp_url}</code></div>
+  <p><strong>Tools exposed:</strong></p>
+  <ul>
+    <li><code>search_metric_views(query, top_k)</code> — semantic search over metric views</li>
+    <li><code>get_metric_view_details(metric_view_fqn)</code> — full definition + YAML</li>
+    <li><code>generate_sql_example(metric_view_fqn, measures, dimensions)</code> — MEASURE()/GROUP BY ALL SQL</li>
+    <li><code>refresh_metric_views()</code> — re-scan catalogs and rebuild the index</li>
+  </ul>
+  <p><strong>Indexed metric views:</strong> {len(_view_names)}</p>
+  <p style="color:#666;font-size:0.9em">Health check: <code>/health</code></p>
+</body></html>"""
+    return HTMLResponse(html)
+
+
+@mcp.custom_route("/health", methods=["GET"])
+async def health(request):
+    """Lightweight health/status endpoint."""
+    from starlette.responses import JSONResponse
+    return JSONResponse({
+        "status": "ok",
+        "indexed_metric_views": len(_view_names),
+        "metric_views": _view_names,
+    })
+
+
 # ── MCP Tools ─────────────────────────────────────────────────────
 
 @mcp.tool()
