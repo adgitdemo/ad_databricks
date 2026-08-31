@@ -1,0 +1,87 @@
+@import "@databricks/appkit-ui/styles.css";
+
+/*
+ * Databricks brand theme — white surfaces + Databricks orange (#FF3621),
+ * navy ink (#1B3139). Committed to a light look so it stays on-brand even when
+ * the device is in dark mode (the dark-mode block below mirrors these values).
+ */
+:root {
+  --radius: 0.625rem;
+
+  --background: #ffffff;
+  --foreground: #1b3139; /* Databricks navy ink */
+
+  --card: #ffffff;
+  --card-foreground: #1b3139;
+  --popover: #ffffff;
+  --popover-foreground: #1b3139;
+
+  --primary: #ff3621; /* Databricks orange */
+  --primary-foreground: #ffffff;
+
+  --secondary: #f6f7f9;
+  --secondary-foreground: #1b3139;
+
+  --muted: #f2f4f6;
+  --muted-foreground: #5a6872;
+
+  --accent: #ffece9; /* soft orange tint for hover/accent surfaces */
+  --accent-foreground: #1b3139;
+
+  --destructive: #d92d20;
+  --destructive-foreground: #ffffff;
+  --success: #12805c;
+  --success-foreground: #ffffff;
+  --warning: #f2a900;
+  --warning-foreground: #1b3139;
+
+  --border: #e4e7eb;
+  --input: #e4e7eb;
+  --ring: #ff3621; /* orange focus ring */
+
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1b3139;
+  --sidebar-primary: #ff3621;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ffece9;
+  --sidebar-accent-foreground: #1b3139;
+  --sidebar-border: #e4e7eb;
+  --sidebar-ring: #ff3621;
+}
+
+/* Keep the same white + orange look in dark mode (brand-committed). */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #ffffff;
+    --foreground: #1b3139;
+    --card: #ffffff;
+    --card-foreground: #1b3139;
+    --popover: #ffffff;
+    --popover-foreground: #1b3139;
+    --primary: #ff3621;
+    --primary-foreground: #ffffff;
+    --secondary: #f6f7f9;
+    --secondary-foreground: #1b3139;
+    --muted: #f2f4f6;
+    --muted-foreground: #5a6872;
+    --accent: #ffece9;
+    --accent-foreground: #1b3139;
+    --destructive: #d92d20;
+    --destructive-foreground: #ffffff;
+    --success: #12805c;
+    --success-foreground: #ffffff;
+    --warning: #f2a900;
+    --warning-foreground: #1b3139;
+    --border: #e4e7eb;
+    --input: #e4e7eb;
+    --ring: #ff3621;
+    --sidebar: #ffffff;
+    --sidebar-foreground: #1b3139;
+    --sidebar-primary: #ff3621;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #ffece9;
+    --sidebar-accent-foreground: #1b3139;
+    --sidebar-border: #e4e7eb;
+    --sidebar-ring: #ff3621;
+  }
+}

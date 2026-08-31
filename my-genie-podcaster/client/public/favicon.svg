@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="My Genie Podcaster">
+  <!-- Databricks-orange app tile -->
+  <rect width="512" height="512" rx="112" fill="#FF3621"/>
+  <g fill="none" stroke="#ffffff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+    <!-- podcast microphone: capsule -->
+    <rect x="192" y="150" width="96" height="168" rx="48" fill="#ffffff" stroke="none"/>
+    <!-- mic holder cradle -->
+    <path d="M158 264 A82 90 0 0 0 322 264"/>
+    <!-- stand + base -->
+    <line x1="240" y1="348" x2="240" y2="398"/>
+    <line x1="202" y1="400" x2="278" y2="400"/>
+  </g>
+  <!-- Genie sparkle -->
+  <polygon points="392,96 403,139 446,150 403,161 392,204 381,161 338,150 381,139" fill="#ffffff"/>
+</svg>

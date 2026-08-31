@@ -1,0 +1,62 @@
+bundle:
+  name: my_genie_podcaster
+
+# Ship the prebuilt server/client artifacts, but NOT node_modules: the app must
+# install its own Linux-native dependencies (e.g. onnxruntime-node) from
+# package.json. The Kokoro model weights are NOT shipped here — the 88MB file
+# exceeds the 10MB workspace-file limit — they live in the UC Volume and the app
+# downloads them to local disk at startup (see server/tts.ts ensureModel).
+# Also exclude local caches and machine-specific files.
+sync:
+  include:
+    - dist/**
+    - client/dist/**
+  exclude:
+    - node_modules
+    - .hf-cache
+    - data
+    - .npmrc
+    - .env
+    - .smoke-test
+    - test-results
+    - playwright-report
+
+resources:
+  apps:
+    app:
+      name: "my-genie-podcaster"
+      description: "My Genie Podcaster — turn Genie answers into a spoken podcast (Kokoro-82M TTS)"
+      source_code_path: ./
+      # Run Genie queries on behalf of the signed-in user.
+      user_api_scopes:
+        - dashboards.genie
+
+      # ── Databricks resources ──────────────────────────────────────────────
+      # Grants the app service principal:
+      #   • CAN_CONNECT_AND_CREATE on the Lakebase database (create/query tables)
+      #   • READ_VOLUME + WRITE_VOLUME on the audio Volume (store/serve WAVs)
+      # Env wiring (LAKEBASE_ENDPOINT valueFrom postgres, DATABRICKS_VOLUME_AUDIO)
+      # lives in app.yaml. PGHOST/PGDATABASE/PGSSLMODE/PGUSER/PGPORT are injected
+      # automatically by the `postgres` resource at runtime.
+      resources:
+        - name: postgres
+          postgres:
+            branch: projects/<your-lakebase-project>/branches/<your-branch>
+            database: projects/<your-lakebase-project>/branches/<your-branch>/databases/<your-database>
+            permission: CAN_CONNECT_AND_CREATE
+        - name: audio_volume_read
+          uc_securable:
+            securable_full_name: <catalog>.<schema>.<audio-volume>
+            securable_type: VOLUME
+            permission: READ_VOLUME
+        - name: audio_volume_write
+          uc_securable:
+            securable_full_name: <catalog>.<schema>.<audio-volume>
+            securable_type: VOLUME
+            permission: WRITE_VOLUME
+
+targets:
+  default:
+    default: true
+    workspace:
+      host: https://<your-workspace>.cloud.databricks.com

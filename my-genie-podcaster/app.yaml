@@ -1,0 +1,8 @@
+command: ['npm', 'run', 'start']
+env:
+  # Lakebase Autoscaling endpoint (resolved from the `postgres` app resource).
+  - name: LAKEBASE_ENDPOINT
+    valueFrom: postgres
+  # UC Volume where narration audio (WAV) is stored.
+  - name: DATABRICKS_VOLUME_AUDIO
+    value: /Volumes/<catalog>/<schema>/<audio-volume>
